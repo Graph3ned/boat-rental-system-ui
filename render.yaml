@@ -1,7 +1,7 @@
 services:
   - type: web
     name: boat-rental-system
-    runtime: php
+    env: node
     buildCommand: |
       curl -sS https://getcomposer.org/installer | php
       php composer.phar install --no-dev --optimize-autoloader
