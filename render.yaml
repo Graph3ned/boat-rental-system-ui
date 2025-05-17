@@ -1,9 +1,9 @@
 services:
   - type: web
     name: boat-rental-system
-    env: node
-    buildCommand: |
-      curl -sS https://getcomposer.org/installer | php
+    env: docker
+    dockerfilePath: ./Dockerfile
+    buildCommand: curl -sS https://getcomposer.org/installer | php
       php composer.phar install --no-dev --optimize-autoloader
       php artisan key:generate --force
       php artisan config:cache
