@@ -2,7 +2,7 @@ services:
   - type: web
     name: boat-rental-system
     env: php
-    buildCommand: composer install && php artisan key:generate && php artisan migrate --force && npm install && npm run build
+    buildCommand: curl -sS https://getcomposer.org/installer | php && php composer.phar install && php artisan key:generate && php artisan migrate --force && npm install && npm run build
     startCommand: vendor/bin/heroku-php-apache2 public/
     envVars:
       - key: APP_ENV
