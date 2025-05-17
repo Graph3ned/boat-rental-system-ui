@@ -1,11 +1,9 @@
-
 services:
   - type: web
     name: boat-rental-system
     env: docker
     dockerfilePath: ./Dockerfile
-    buildCommand: ""
-    startCommand: ""
+    autoDeploy: true
     envVars:
       - key: APP_ENV
         value: production
