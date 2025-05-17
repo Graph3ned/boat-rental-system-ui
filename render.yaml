@@ -2,7 +2,16 @@ services:
   - type: web
     name: boat-rental-system
     env: php
-    buildCommand: curl -sS https://getcomposer.org/installer | php && php composer.phar install && php artisan key:generate && php artisan migrate --force && npm install && npm run build
+    buildCommand: |
+      curl -sS https://getcomposer.org/installer | php
+      php composer.phar install --no-dev --optimize-autoloader
+      php artisan key:generate --force
+      php artisan config:cache
+      php artisan route:cache
+      php artisan view:cache
+      php artisan migrate --force
+      npm install
+      npm run build
     startCommand: vendor/bin/heroku-php-apache2 public/
     envVars:
       - key: APP_ENV
@@ -12,7 +21,11 @@ services:
       - key: APP_KEY
         generateValue: true
       - key: APP_URL
-        value: https://your-app-name.onrender.com
+        value: https://boat-rental-system.onrender.com
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: error
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
